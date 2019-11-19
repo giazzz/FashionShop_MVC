@@ -1,0 +1,247 @@
+﻿@model PagedList.IPagedList<BabyShop.Models.Product>
+@using System.Data.SqlClient
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Shop";
+}
+<!-- Product -->
+<div class="bg0 m-t-23 p-b-140" style="margin-top: 80px; border-top: 2px outset;">
+    <div class="container" style="padding-top: 16px;">
+        <div class="flex-w flex-sb-m p-b-52">
+            <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter="*">
+                    @Html.ActionLink("All products", "Shop", new { catalog = 0, SortOrder = "", searchString = "", price = "", age=""  }, new { @class = ViewBag.CurrentCatalog == 0 ? "activelink " : "catalog-nonactive" })
+                </button>
+
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+                    @Html.ActionLink("Girls", "Shop", new { catalog = 2 }, new { @class = ViewBag.CurrentCatalog == 2 ? "activelink " : "catalog-nonactive" })
+                </button>
+
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+                    @Html.ActionLink("Boys", "Shop", new { catalog = 3 }, new { @class = ViewBag.CurrentCatalog == 3 ? "activelink" : "catalog-nonactive" })
+                </button>
+
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
+                    @Html.ActionLink("Bags", "Shop", new { catalog = 4 }, new { @class = ViewBag.CurrentCatalog == 4 ? "activelink" : "catalog-nonactive" })
+                </button>
+
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
+                    @Html.ActionLink("Hats", "Shop", new { catalog = 6 }, new { @class = ViewBag.CurrentCatalog == 6 ? "activelink" : "catalog-nonactive" })
+                </button>
+
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
+                    @Html.ActionLink("Shoes", "Shop", new { catalog = 5 }, new { @class = ViewBag.CurrentCatalog == 5 ? "activelink" : "catalog-nonactive" })
+                </button>
+            </div>
+
+            <div class="flex-w flex-c-m m-tb-10">
+
+                @using (Html.BeginForm("Shop", "Home", FormMethod.Get))
+                {
+                    <div class="panel-search w-full p-t-10 p-b-15" style="padding-bottom: 10px;padding-right: 10px;">
+                        <div class="bor8 dis-flex p-l-15" style="height: 40px;">
+                            <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" style="height: 42px;">
+                                <i class="zmdi zmdi-search"></i>
+                            </button>
+                            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @name = "search-product", @placeholder = "Search", @class = "mtext-107 cl2 size-114 plh2 p-r-15", @style="height: 38px;" })
+
+                        </div>
+                    </div>
+
+
+                }
+                @*<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+            <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+            <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+            Search
+        </div>*@
+                <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+                    <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+                    <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                    Filter
+                </div>
+            </div>
+
+            <!-- Search product -->
+            @*<div class="dis-none panel-search w-full p-t-10 p-b-15">
+                <div class="bor8 dis-flex p-l-15">
+                    <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
+
+                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+                </div>
+            </div>*@
+            
+
+            <!-- Filter -->
+            <div class="panel-filter w-full p-t-10">
+                <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+                    <div class="filter-col1 p-r-15 p-b-27">
+                        <div class="mtext-102 cl2 p-b-15">
+                            Sort By
+                        </div>
+
+                        <ul>
+                            <li class="p-b-6">
+                                @Html.ActionLink("Default", "Shop", new { sortOrder = "name", currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog}, new { @class = ViewBag.CurrentSort == "name" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+
+                            <li class="p-b-6">
+                                @Html.ActionLink("Newness", "Shop", new { sortOrder = "date_desc", currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentSort == "date_desc" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+
+                            <li class="p-b-6">
+                                @Html.ActionLink("Price: Low to High", "Shop", new { sortOrder = "price", currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentSort == "price" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+
+                            <li class="p-b-6">
+                                @Html.ActionLink("Price: High to Low", "Shop", new { sortOrder = "price_desc", currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentSort == "price_desc" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-col2 p-r-15 p-b-27">
+                        <div class="mtext-102 cl2 p-b-15">
+                            Price
+                        </div>
+
+                        <ul>
+                            <li class="p-b-6">
+                                @Html.ActionLink("All", "Shop", new { price = "", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentPrice == "" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+                            <li class="p-b-6">
+                                @Html.ActionLink("$0.00 - $50.00", "Shop", new { price = "0_50", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentPrice == "0_50" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+
+                            <li class="p-b-6">
+                                @Html.ActionLink("$50.00 - $100.00", "Shop", new { price = "50_100", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentPrice == "50_100" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+
+                            <li class="p-b-6">
+                                @Html.ActionLink("$100.00 - $150.00", "Shop", new { price = "100_150", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentPrice == "100_150" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+
+                            <li class="p-b-6">
+                                @Html.ActionLink("$150.00+", "Shop", new { price = "150", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentPrice == "150" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="filter-col3 p-r-15 p-b-27">
+                        <div class="mtext-102 cl2 p-b-15">
+                            Age
+                        </div>
+
+                        <ul>
+                            <li class="p-b-6">
+                                @Html.ActionLink("All", "Shop", new { age = "", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog}, new { @class = ViewBag.CurrentAge == "" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+                            <li class="p-b-6">
+                                @Html.ActionLink("0 - 12 months", "Shop", new { age = "0_1", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentAge == "0_1" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+
+                            <li class="p-b-6">
+                                @Html.ActionLink("1 - 4 years", "Shop", new { age = "1_4", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentAge == "1_4" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+
+                            <li class="p-b-6">
+                                @Html.ActionLink("4 - 8 years", "Shop", new { age = "4_8", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentAge == "4_8" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+
+                            <li class="p-b-6">
+                                @Html.ActionLink("8 - 12 years", "Shop", new { age = "8_12", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentAge == "8_12" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="filter-col4 p-b-27">
+                        <div class="mtext-102 cl2 p-b-15">
+                            Tags
+                        </div>
+
+                        <div class="flex-w p-t-4 m-r--5">
+                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                Fashion
+                            </a>
+
+                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                Lifestyle
+                            </a>
+
+                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                Denim
+                            </a>
+
+                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                Streetstyle
+                            </a>
+
+                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                Crafts
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row isotope-grid">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <a href="/Home/ProductDetail?id=@item.Id">
+                                <img src="@item.Image" alt="IMG-PRODUCT">
+                            </a>
+                            <button class="add-to-cart it_mine_ok block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 p-lr-15 trans-04" style="color: #fff;" data-id="@item.Id" data-name="@item.Name" data-image="@item.Image" data-price="@item.Price">
+                                Add to cart
+                            </button>
+                        </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="/Home/ProductDetail?id=@item.Id" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </a>
+
+                                <a href="/Home/ProductDetail?id=@item.Id" class="stext-105 cl3">
+                                    $@Html.DisplayFor(modelItem => item.Price)
+                                </a>
+                            </div>
+
+                            <div class="block2-txt-child2 flex-r p-t-3">
+                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                    <img class="icon-heart1 dis-block trans-04" src="/Content/images/icons/icon-heart-01.png" alt="ICON">
+                                    <img class="icon-heart2 dis-block trans-04 ab-t-l" src="/Content/images/icons/icon-heart-02.png" alt="ICON">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <!-- Page -->
+        @if (!String.IsNullOrEmpty(@ViewBag.notFound))
+        {
+            <div class="flex-c-m flex-w w-full p-t-45">
+                @ViewBag.notFound
+            </div>
+        }
+    <div class="flex-c-m flex-w w-full p-t-45">
+        <div style="width: 100%; text-align: center;">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        </div>
+        <div>
+            @Html.PagedListPager(Model, page => Url.Action("Shop",
+                new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
+        </div>
+
+    </div>
+    </div>
+</div>
+

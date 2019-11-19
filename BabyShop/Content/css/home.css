@@ -1,0 +1,36 @@
+﻿.activelink{
+     color: #6c7ae0;
+     border-bottom: 1px solid #6c7ae0;
+ }
+.catalog-nonactive {
+    color: #888;
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    line-height: 1.2;
+}
+.catalog-nonactive:hover {
+    color: #333;
+    border-color: #797979;
+    border-bottom: 1px solid transparent;
+}
+
+.it_mine_ok {
+     background-color: #ff8087 !important;
+     box-shadow: 0 0 0 3px #ff8087;
+     font-family: Quicksand;
+     border-radius: 2em !important;
+     cursor: pointer;
+     font-size: 13px;
+     letter-spacing: 1px;
+     border: 2px dashed #fff;
+     transition: all .6s cubic-bezier(.77,0,.175,1);
+     text-transform: uppercase;
+     font-weight: 600;
+     outline: none;
+     color: #fff;
+     background: #81d1e5;
+ }
+.it_mine_ok:hover {
+    background-color: #57c1db !important;
+    box-shadow: 0 0 0 3px #57c1db;
+}
