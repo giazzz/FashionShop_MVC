@@ -34,3 +34,50 @@
     background-color: #57c1db !important;
     box-shadow: 0 0 0 3px #57c1db;
 }
+
+ .counter {
+     font-family: 'Oswald', sans-serif;
+     font-weight: 400;
+     font-size: 35px;
+     margin: 0 60px;
+     color: #5E606A;
+ }
+.minus, .plus {
+    height: 72px;
+    width: 30px;
+    vertical-align: top;
+    position: relative;
+}
+.minus {
+    text-align: right;
+}
+.minus svg, .plus svg {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  
+}
+.header-cart-item-img {
+    margin-right: 12px;
+    float: left;
+}
+.header-cart-item-txt {
+    width: 45%;
+    float: left;
+}
+.minus-cart {
+    cursor: pointer;
+    float: left;
+    margin-top: 6px;
+}
+.counter-cart {
+    float: left;
+    font-size: 25px;
+    padding: 0px 6px 0px 2px;
+}
+.plus-cart {
+    cursor: pointer;
+    float: left;
+    margin-top: 8px;
+}

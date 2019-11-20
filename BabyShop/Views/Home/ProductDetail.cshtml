@@ -127,13 +127,13 @@
                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                     </div>
 
-                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                    <input class="mtext-104 cl3 txt-center num-product" id="counter-detail" type="number" name="num-product" value="1">
 
                                     <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                         <i class="fs-16 zmdi zmdi-plus"></i>
                                     </div>
                                 </div>
-                                <button class="add-to-cart it_mine_ok flex-c-m stext-101 cl0 size-101 bg1 bor1 p-lr-15 trans-04" style="padding: 12px 40px;" data-id="@ViewBag.Product.Id" data-name="@ViewBag.Product.Name" data-image="@ViewBag.Product.Image" data-price="@ViewBag.Product.Price">
+                                <button class="it_mine_ok flex-c-m stext-101 cl0 size-101 bg1 bor1 p-lr-15 trans-04" id="add-cart-detail" style="padding: 12px 40px;margin-left: 20px; margin-top: 75px;" data-id="@ViewBag.Product.Id" data-name="@ViewBag.Product.Name" data-image="@ViewBag.Product.Image" data-price="@ViewBag.Product.Price">
                                     Add to cart
                                 </button>
                             </div>
@@ -141,7 +141,7 @@
                     </div>
 
                     <!--  -->
-                    <div class="flex-w flex-m p-l-100 p-t-40 respon7">
+                    <div class="flex-w flex-m p-l-100 p-t-40 respon7" style="margin-left: 55px;">
                         <div class="flex-m bor9 p-r-10 m-r-11">
                             <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
                                 <i class="zmdi zmdi-favorite"></i>
