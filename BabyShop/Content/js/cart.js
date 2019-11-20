@@ -143,7 +143,7 @@
             contentCart +=
                 `<li class="header-cart-item flex-w flex-t m-b-12">
 						<div style="width: 100%">
-							<div class="header-cart-item-img delete-item" data-id = "${cartArray[i].id}">
+							<div class="header-cart-item-img delete-item" data-id = "${cartArray[i].id}" title="Delete item?">
 								<img src="${cartArray[i].image}" alt="IMG">
 							</div>
 							<div class="header-cart-item-txt p-t-8">
@@ -156,7 +156,7 @@
 								</span>
 							</div>
 							<div style="float: left; width: auto; margin-top: 20px;">
-								<div class="minus-cart" data-id = "${cartArray[i].id}">
+								<div class="minus-cart" data-id = "${cartArray[i].id}" title="${cartArray[i].count == 1 ? 'Delete item?' : ''}">
 	                                <svg width="19" height="5" viewBox="0 0 11 5">
 	                                    <title>Minus</title>
 	                                    <path d="M0 2.5C0 1.1 1.1 0 2.5 0L8.5 0C9.9 0 11 1.1 11 2.5 11 3.9 9.9 5 8.5 5L2.5 5C1.1 5 0 3.9 0 2.5L0 2.5Z" id="minus" fill="#AAABAF"/>
@@ -213,7 +213,7 @@
             contentCart +=
                              `<tr class="table_row">
                                 <td class="column-1">
-                                    <div class="how-itemcart1">
+                                    <div class="how-itemcart1 delete-item-cart" data-id = "${cartArray[i].id}" title="Delete item?">
                                         <img src="${cartArray[i].image}" alt="IMG">
                                     </div>
                                 </td>
@@ -221,13 +221,13 @@
                                 <td class="column-3">$ ${cartArray[i].price}</td>
                                 <td class="column-4">
                                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m minus-cart-page" data-id = "${cartArray[i].id}" title="${cartArray[i].count == 1?'Delete item?':''}">
                                             <i class="fs-16 zmdi zmdi-minus"></i>
                                         </div>
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="${cartArray[i].count}">
+                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="${cartArray[i].count}" readonly>
 
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m plus-cart-page" data-id = "${cartArray[i].id}">
                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                         </div>
                                     </div>
@@ -235,11 +235,43 @@
                                 <td class="column-5">$ ${cartArray[i].price * cartArray[i].count}</td>
                             </tr>`;
         }
-        $('.show-cart-page').append(contentCart);
+        $('.show-cart-page').html(contentCart);
         $('.total-cart-page').html("$ "+shoppingCart.totalCart());
     }
+    $('.show-cart-page').on('click', '.plus-cart-page', function() {
+        var id = $(this).data('id');
+        shoppingCart.addItemToCart(id);
+        displayCartPage();
+    });
+    $('.show-cart-page').on('click', '.minus-cart-page', function () {
+        var id = $(this).data('id');
+        shoppingCart.removeItemFromCart(id);
+        displayCartPage();
+    });
+    $('.show-cart-page').on('click', '.delete-item-cart', function () {
+        var id = $(this).data('id');
+        shoppingCart.removeAllItemFromCart(id);
+        displayCartPage();
+    });
+    //Neu vao trang Cart an nut gio hang, append html:
+    if (window.location.pathname == "/Home/Cart") {
+        $('.wrap-icon-header').css({ "display": "none" });
+        displayCartPage();
+    }
+    //Doi mau link:
+    //$("[href]").each(function () {
+    //    if (this.href == window.location.pathname) {
+    //        $(this).addClass("change-color");
+    //    }
+    //});
+    $(".link").each(function () {
+        if (this.href == window.location.href) {
+            $(this).css({ "color": "#6c7ae0" });
+        }
+    });
+
+
     displayCart();
-    displayCartPage();
 });
 
     
