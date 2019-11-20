@@ -147,7 +147,7 @@
 								<img src="${cartArray[i].image}" alt="IMG">
 							</div>
 							<div class="header-cart-item-txt p-t-8">
-								<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								<a href="/Home/ProductDetail?id=${cartArray[i].id}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
 									${cartArray[i].name}
 								</a>
 
@@ -206,8 +206,40 @@
         shoppingCart.addItemFromDetail(id, name, price, image, count);
         displayCart();
     });
+    function displayCartPage() {
+        var cartArray = shoppingCart.listCart();
+        var contentCart = "";
+        for (var i in cartArray) {
+            contentCart +=
+                             `<tr class="table_row">
+                                <td class="column-1">
+                                    <div class="how-itemcart1">
+                                        <img src="${cartArray[i].image}" alt="IMG">
+                                    </div>
+                                </td>
+                                <td class="column-2">${cartArray[i].name}</td>
+                                <td class="column-3">$ ${cartArray[i].price}</td>
+                                <td class="column-4">
+                                    <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-minus"></i>
+                                        </div>
 
+                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="${cartArray[i].count}">
+
+                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-plus"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="column-5">$ ${cartArray[i].price * cartArray[i].count}</td>
+                            </tr>`;
+        }
+        $('.show-cart-page').append(contentCart);
+        $('.total-cart-page').html("$ "+shoppingCart.totalCart());
+    }
     displayCart();
+    displayCartPage();
 });
 
     

@@ -3,6 +3,7 @@
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
     ViewBag.Title = "Shop";
 }
 <!-- Product -->
@@ -36,44 +37,25 @@
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
-
-                @using (Html.BeginForm("Shop", "Home", FormMethod.Get))
-                {
-                    <div class="panel-search w-full p-t-10 p-b-15" style="padding-bottom: 10px;padding-right: 10px;">
-                        <div class="bor8 dis-flex p-l-15" style="height: 40px;">
-                            <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" style="height: 42px;">
-                                <i class="zmdi zmdi-search"></i>
-                            </button>
-                            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @name = "search-product", @placeholder = "Search", @class = "mtext-107 cl2 size-114 plh2 p-r-15", @style="height: 38px;" })
-
-                        </div>
-                    </div>
-
-
-                }
-                @*<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-            <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-            <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-            Search
-        </div>*@
                 <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
                     <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
                     <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
                     Filter
                 </div>
+                @using (Html.BeginForm("Shop", "Home", FormMethod.Get))
+                {
+                    <div class="panel-search w-full p-t-10 p-b-15" style="padding-bottom: 10px; padding-right: 10px;">
+                        <div class="bor8 dis-flex p-l-15" style="height: 40px;">
+                            <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" style="height: 42px;">
+                                <i class="zmdi zmdi-search"></i>
+                            </button>
+                            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @name = "search-product", @placeholder = "Search", @class = "mtext-107 cl2 size-114 plh2 p-r-15", @style = "height: 38px;" })
+
+                        </div>
+                    </div>
+                }
+
             </div>
-
-            <!-- Search product -->
-            @*<div class="dis-none panel-search w-full p-t-10 p-b-15">
-                <div class="bor8 dis-flex p-l-15">
-                    <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-                        <i class="zmdi zmdi-search"></i>
-                    </button>
-
-                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-                </div>
-            </div>*@
-            
 
             <!-- Filter -->
             <div class="panel-filter w-full p-t-10">
@@ -90,6 +72,10 @@
 
                             <li class="p-b-6">
                                 @Html.ActionLink("Newness", "Shop", new { sortOrder = "date_desc", currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentSort == "date_desc" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                            </li>
+                            
+                            <li class="p-b-6">
+                                @Html.ActionLink("Popular", "Shop", new { sortOrder = "quantity", currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentSort == "quantity" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
                             </li>
 
                             <li class="p-b-6">

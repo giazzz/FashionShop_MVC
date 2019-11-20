@@ -17,7 +17,9 @@ namespace BabyShop.Controllers
         private MyDbContext db = new MyDbContext();
         public ActionResult Index()
         {
-            return View();
+            var popularProduct= db.Products.OrderBy(s => s.Quantity).Take(8);
+            ViewBag.NewestProduct= (db.Products.OrderByDescending(s => s.CreateAt).Take(8)).ToList();
+            return View(popularProduct.ToList());
         }
 
         public ActionResult Shop(string sortOrder, string currentFilter, string searchString, int? page, string age,string price, int? catalog)
@@ -94,6 +96,9 @@ namespace BabyShop.Controllers
                     break;
                 case "price":
                     data = data.OrderBy(s => s.Price);
+                    break;
+                case "quantity":
+                    data = data.OrderByDescending(s => s.Quantity);
                     break;
                 case "price_desc":
                     data = data.OrderByDescending(s => s.Price);
