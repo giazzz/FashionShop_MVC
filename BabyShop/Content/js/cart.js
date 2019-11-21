@@ -269,6 +269,10 @@
             $(this).css({ "color": "#6c7ae0" });
         }
     });
+    $('.check-out').click(function() {
+        shoppingCart.clearCart();
+        displayCartPage();
+    });
 
 
     displayCart();
