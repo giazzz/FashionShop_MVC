@@ -82,3 +82,14 @@
     float: left;
     margin-top: 8px;
 }
+.shopping-success {
+    text-align: center;
+    display: none;
+}
+.continue-shop {
+    width: 10px;
+    margin: 0 auto;
+}
+.succe {
+    margin-bottom: 45px;
+}

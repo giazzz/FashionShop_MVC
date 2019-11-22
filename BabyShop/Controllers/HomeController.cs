@@ -107,7 +107,7 @@ namespace BabyShop.Controllers
                     data = data.OrderBy(s => s.Name);
                     break;
             }
-            int pageSize = 4;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
             if (data.Count() != 0)
             {

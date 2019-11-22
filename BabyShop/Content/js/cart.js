@@ -273,6 +273,16 @@
         shoppingCart.clearCart();
         displayCartPage();
     });
+    //console.log(shoppingCart.listCart().length);
+    //$('.check-out').click(function() {
+    //    if (shoppingCart.listCart().length != 0) {
+    //        shoppingCart.clearCart();
+    //        displayCartPage();
+    //        $('.shop-cart-page').css({ "display": "none" });
+    //        $('.shopping-success').css({ "display": "block" });
+    //    }
+    //});
+
 
 
     displayCart();
