@@ -95,7 +95,7 @@
 
                         <ul>
                             <li class="p-b-6">
-                                @Html.ActionLink("All", "Shop", new { price = "", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentPrice == "" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                                @Html.ActionLink("All", "Shop", new { price = "all", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentPrice == "all" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
                             </li>
                             <li class="p-b-6">
                                 @Html.ActionLink("$0.00 - $50.00", "Shop", new { price = "0_50", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, age = ViewBag.CurrentAge, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentPrice == "0_50" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
@@ -121,7 +121,7 @@
 
                         <ul>
                             <li class="p-b-6">
-                                @Html.ActionLink("All", "Shop", new { age = "", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog}, new { @class = ViewBag.CurrentAge == "" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
+                                @Html.ActionLink("All", "Shop", new { age = "all", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog}, new { @class = ViewBag.CurrentAge == "all" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })
                             </li>
                             <li class="p-b-6">
                                 @Html.ActionLink("0 - 12 months", "Shop", new { age = "0_1", sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, price = ViewBag.CurrentPrice, catalog = ViewBag.CurrentCatalog }, new { @class = ViewBag.CurrentAge == "0_1" ? "activelink filter-link stext-106 trans-04" : "filter-link stext-106 trans-04" })

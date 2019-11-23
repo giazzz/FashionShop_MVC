@@ -177,6 +177,13 @@
         $('.show-cart').html(contentCart);
         $('.total-count').html(shoppingCart.totalCount());
         $('.total-cart').html(shoppingCart.totalCart());
+        if (shoppingCart.listCart().length == 0) {
+            $('.cart-checkout').css({ "display": "none" });
+            $('.cart-message').css({ "display": "inline" });
+        } else {
+            $('.cart-checkout').css({ "display": "flex" });
+            $('.cart-message').css({ "display": "none" });
+        }
     }
     //Delete item:
     $('.show-cart').on('click', '.delete-item', function() {
@@ -253,10 +260,19 @@
         shoppingCart.removeAllItemFromCart(id);
         displayCartPage();
     });
-    //Neu vao trang Cart an nut gio hang, append html:
+    //Neu vao trang Cart an nut gio hang, inner html:
+    
     if (window.location.pathname == "/Home/Cart") {
         $('.wrap-icon-header').css({ "display": "none" });
-        displayCartPage();
+        if (shoppingCart.listCart().length == 0) {
+            $('.shop-cart-page').css({ "display": "none" });
+            $('.coupon').css({ "display": "none" });
+            $('.shopping-success').css({ "display": "block" });
+        } else {
+            displayCartPage();
+        }
+        
+
     }
     //Doi mau link:
     //$("[href]").each(function () {
@@ -273,17 +289,8 @@
         shoppingCart.clearCart();
         displayCartPage();
     });
-    //console.log(shoppingCart.listCart().length);
-    //$('.check-out').click(function() {
-    //    if (shoppingCart.listCart().length != 0) {
-    //        shoppingCart.clearCart();
-    //        displayCartPage();
-    //        $('.shop-cart-page').css({ "display": "none" });
-    //        $('.shopping-success').css({ "display": "block" });
-    //    }
-    //});
-
-
+    
+    
 
     displayCart();
 });

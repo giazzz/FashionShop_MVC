@@ -256,7 +256,7 @@
                 </div>
             </div>
 
-            <div class="header-cart-content flex-w js-pscroll">
+            <div class="header-cart-content flex-w js-pscroll" style="width: 100%">
                 <ul class="header-cart-wrapitem w-full show-cart">
   
                 </ul>
@@ -265,18 +265,20 @@
                         <div style="width: 50%; display: inline;font-size: 23px">
                             Total: <span class="total-cart"></span>$
                         </div>
-                        <div style="color: red; width: 25%; float: right; display: inline; cursor: pointer;text-align: right;
-                                                                                                                                                                                                                                      padding-right: 43px;" class="clear-cart" title="Clear cart">
+                        <div style="color: red; width: 25%; float: right; display: inline; cursor: pointer;text-align: right;" class="clear-cart">
                             <i class="zmdi zmdi-delete" style=" font-size: 30px;"></i>
                         </div>
                     </div>
-                    <div class="header-cart-buttons flex-w w-full">
+                    <div class="header-cart-buttons flex-w w-full cart-checkout">
                         <a href="/Home/Cart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10 view-cart">
                             View Cart
                         </a>
                         <a href="/Home/Cart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                             Check Out
                         </a>
+                    </div>
+                    <div class="header-cart-buttons flex-w w-full cart-message" style="text-align: center">
+                        <h4>No item in cart!</h4>
                     </div>
                 </div>
             </div>
