@@ -22,9 +22,26 @@ namespace BabyShop
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //          "~/Content/bootstrap.css",
+            //          "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/Content/css/bootstrap.min.css",
+                "~/Content/css/font-awesome.min.css",
+                "~/Content/css/material-design-iconic-font.min.css",
+                "~/Content/css/icon-font.min.css",
+                "~/Content/css/animate.css",
+                "~/Content/css/hamburgers.min.css",
+                "~/Content/css/animsition.min.css",
+                "~/Content/css/select2.min.css",
+                "~/Content/css/daterangepicker.css",
+                "~/Content/css/slick.css",
+                "~/Content/css/magnific-popup.css",
+                "~/Content/css/perfect-scrollbar.css",
+                "~/Content/css/util.css",
+                "~/Content/css/main.css",
+                "~/Content/css/home.css"
+                ));
         }
     }
 }

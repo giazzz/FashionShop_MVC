@@ -261,7 +261,6 @@
         displayCartPage();
     });
     //Neu vao trang Cart an nut gio hang, inner html:
-    
     if (window.location.pathname == "/Home/Cart") {
         $('.wrap-icon-header').css({ "display": "none" });
         if (shoppingCart.listCart().length == 0) {
